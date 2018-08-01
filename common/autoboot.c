@@ -220,7 +220,7 @@ static int __abortboot(int bootdelay)
 #ifdef CONFIG_MENUPROMPT
 	printf(CONFIG_MENUPROMPT);
 #else
-	printf("Hit any key to stop autoboot: %2d ", bootdelay);
+	printf("....Hit any key to stop autoboot: %2d ", bootdelay);
 #endif
 
 	/*
@@ -310,6 +310,7 @@ const char *bootdelay_process(void)
 
 	s = getenv("bootdelay");
 	bootdelay = s ? (int)simple_strtol(s, NULL, 10) : CONFIG_BOOTDELAY;
+	printf("getenv bootdelay %s %d\n", s, CONFIG_BOOTDELAY);
 
 #if !defined(CONFIG_FSL_FASTBOOT) && defined(is_boot_from_usb)
 	if (is_boot_from_usb()) {
