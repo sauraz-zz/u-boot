@@ -287,7 +287,6 @@
 
 #define CONFIG_CMD_BMODE
 
-#define CONFIG_SOFT_SPI
 
 #ifdef CONFIG_FSL_QSPI
 #define CONFIG_SYS_FSL_QSPI_AHB
