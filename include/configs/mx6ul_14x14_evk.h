@@ -29,8 +29,6 @@
 #undef CONFIG_LDO_BYPASS_CHECK
 #endif
 
-/* SPL options */
-#include "imx6_spl.h"
 
 #define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
 
