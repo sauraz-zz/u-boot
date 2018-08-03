@@ -235,7 +235,9 @@ static int _do_env_set(int flag, int argc, char * const argv[], int env_flag)
 	debug("Final value for argc=%d\n", argc);
 	name = argv[1];
 	value = argv[2];
-
+	
+	//printf("## _do_env_set \"%d\" variable, value=%c\n",name, value);
+	
 	if (strchr(name, '=')) {
 		printf("## Error: illegal character '='"
 		       "in variable name \"%s\"\n", name);
@@ -287,7 +289,7 @@ static int _do_env_set(int flag, int argc, char * const argv[], int env_flag)
 int setenv(const char *varname, const char *varvalue)
 {
 	const char * const argv[4] = { "setenv", varname, varvalue, NULL };
-
+	//printf("SetENV normal triggered !\n");
 	/* before import into hashtable */
 	if (!(gd->flags & GD_FLG_ENV_READY))
 		return 1;
@@ -309,7 +311,7 @@ int setenv_ulong(const char *varname, ulong value)
 {
 	/* TODO: this should be unsigned */
 	char *str = simple_itoa(value);
-
+	//printf("SetENV ulong triggered !\n");
 	return setenv(varname, str);
 }
 
@@ -323,7 +325,7 @@ int setenv_ulong(const char *varname, ulong value)
 int setenv_hex(const char *varname, ulong value)
 {
 	char str[17];
-
+	//printf("SetENV HEX triggered !\n");
 	sprintf(str, "%lx", value);
 	return setenv(varname, str);
 }
@@ -346,6 +348,7 @@ ulong getenv_hex(const char *varname, ulong default_val)
 #ifndef CONFIG_SPL_BUILD
 static int do_env_set(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
+	//printf("SetENV do_env_set triggered argv= %s   flag=%d  argc=%d !\n",argv,flag,argc);
 	if (argc < 2)
 		return CMD_RET_USAGE;
 

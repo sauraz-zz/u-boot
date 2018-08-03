@@ -63,7 +63,7 @@ int env_init(void)
 {
 	/* use default */
 	gd->env_addr	= (ulong)&default_environment[0];
-	gd->env_valid	= 1;
+	gd->env_valid	= 0;
 
 	return 0;
 }
@@ -134,6 +134,7 @@ static inline int write_env(struct mmc *mmc, unsigned long size,
 	blk_cnt		= ALIGN(size, mmc->write_bl_len) / mmc->write_bl_len;
 
 	n = blk_dwrite(desc, blk_start, blk_cnt, (u_char *)buffer);
+	printf("write_env %d %d\n",blk_start, blk_cnt);
 
 	return (n == blk_cnt) ? 0 : -1;
 }
@@ -157,6 +158,7 @@ int saveenv(void)
 		return 1;
 	}
 
+	printf("saveenv triggered !\n");
 	ret = env_export(env_new);
 	if (ret)
 		goto fini;

@@ -222,8 +222,8 @@
 				"fi; " \
 			"fi;\0" \
 
+/*
 #define CONFIG_BOOTCOMMAND \
-	   "run findfdt;" \
 	   "run findfdt;" \
 	   "run findtee;" \
 	   "mmc dev ${mmcdev};" \
@@ -238,6 +238,17 @@
 		   "fi; " \
 	   "else run netboot; fi"
 #endif
+*/
+
+#define CONFIG_BOOTCOMMAND \
+	   "setenv mmcroot /dev/mmcblk1p3 rootwait rw;" \
+	   "setenv bootargs console=ttymxc0,115200 root=/dev/mmcblk1p3 rootwait rw;" \
+	   "fatload mmc 1:2 0x83000000 imx6ul-14x14-evk.dtb;" \
+	   "fatload mmc 1:2 0x80800000 zImage;" \
+	   "bootz 0x80800000 - 0x83000000;" 
+#endif
+
+
 
 /* Miscellaneous configurable options */
 #define CONFIG_SYS_MEMTEST_START	0x80000000
